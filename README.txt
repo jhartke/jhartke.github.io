@@ -1,4 +1,4 @@
-Based on
+Based on Read Only by HTML5 UP by AJ
 README below:
 Read Only by HTML5 UP
 html5up.net | @ajlkn
