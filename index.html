@@ -216,191 +216,33 @@
 										<article>
 										<p>At some point during 2022 I started dabbling with taking sketch notes and making small illustrations for my presentations and lectures. For now, here are some about the two-phase formation scenario of massive early-type galaxies. They are licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (Attribution-NonCommercial-ShareAlike 4.0 International) license. </p>	
 										</article>
-									</div>
+  <div class="lb-grid">
+    <a class="lb-thumb" href="images/ETG-2phase-simple.png"
+       data-full="images/ETG-2phase-simple.png"
+       data-caption="The two-phase formation scenario of massive galaxies">
+      <img src="images/ETG-2phase-simple.png" alt="The two-phase formation of massive galaxies">
+    </a>
 
-<style>
-
-
-  .thumb-grid{
-    display:grid;
-    gap:12px;
-
-    /* Default (phone): 1 per row */
-    grid-template-columns: 1fr;
-  }
-
-  /* Wider screens: 2 per row  */
-  @media (min-width: 700px){
-    .thumb-grid{
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  /* Optional: go to 3+ columns on large screens */
-  @media (min-width: 1100px){
-    .thumb-grid{
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  .thumb{
-    display:block;
-    border-radius:8px;
-    overflow:hidden;
-    border:1px solid #ddd;
-    background:#fff;
-    cursor:zoom-in;
-  }
-  .thumb img{
-    width:100%;
-    height:auto;
-    object-fit:cover;
-    display:block;
-    transition:transform .15s ease;
-  }
-  .thumb:hover img{ transform:scale(1.03); }
-
-  /* Lightbox overlay (CSS/JS, no <dialog>) */
-  .lightbox{
-    position:fixed;
-    inset:0;
-    display:none;              /* hidden by default */
-    z-index:9999;
-    background:rgba(0,0,0,.78);
-    padding:24px;
-  }
-  .lightbox.is-open{ display:flex; }
-  .lightbox__panel{
-    margin:auto;
-    position:relative;
-    max-width:min(92vw, 1200px);
-    max-height:88vh;
-    background:#111;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
-  }
-  .lightbox__img{
-    display:block;
-	width:100%;
-	height:auto;
-	object-fit: contain;
-    max-width:92vw;
-    max-height:82vh;
-    width:auto;
-    height:auto;
-  }
-
-  .lightbox__caption{
-    color:#ddd;
-    font:14px/1.3 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    padding:10px 12px;
-  }
-  .lightbox__close{
-    position:absolute;
-    top:10px;
-    right:10px;
-    border:0;
-    background:rgba(255,255,255,.12);
-    color:#262525;
-    width:40px;
-    height:40px;
-    border-radius:999px;
-    font-size:22px;
-    line-height:40px;
-    cursor:pointer;
-  }
-  .lightbox__close:focus{ outline:2px solid #262525; outline-offset:2px; }
-								  /* Prevent background scroll when open */
-  body.lb-lock{ overflow:hidden; }
-</style>
-
-<div class="thumb-grid">
-  <a class="thumb" href="images/ETG-2phase-simple.png" data-full="images/ETG-2phase-simple.png" data-caption="The two-phase formation scnenario of massive galaxies">
-    <img src="images/ETG-2phase-simple.png" alt="The two-phase formation of massive galaxies">
-  </a>
-
-  <a class="thumb" href="images/2phase-relic.png" data-full="images/2phase-relic.png" data-caption="Relics in the context of the two-phase formation scenario of massive galaxies">
-    <img src="images/2phase-relic.png" alt="Photo 2">
-  </a>
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightbox__panel" role="dialog" aria-modal="true" aria-label="Image viewer">
-    <button class="lightbox__close" type="button" aria-label="Close">&times;</button>
-    <img class="lightbox__img" alt="">
-    <div class="lightbox__caption"></div>
+    <a class="lb-thumb" href="images/2phase-relic.png"
+       data-full="images/2phase-relic.png"
+       data-caption="Relics in the context of the two-phase formation scenario of massive galaxies">
+      <img src="images/2phase-relic.png" alt="Relics in the two-phase formation scenario">
+    </a>
   </div>
 </div>
 
-<script>
-  const lb      = document.getElementById('lightbox');
-  const panel   = lb.querySelector('.lightbox__panel');
-  const imgEl   = lb.querySelector('.lightbox__img');
-  const capEl   = lb.querySelector('.lightbox__caption');
-  const closeBt = lb.querySelector('.lightbox__close');
+<!-- Lightbox -->
+<div class="lb-overlay" id="lb-overlay" aria-hidden="true">
+  <div class="lb-panel" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lb-close" type="button" aria-label="Close">&times;</button>
+    <img class="lb-img" id="lb-img" alt="">
+    <div class="lb-caption" id="lb-caption"></div>
+  </div>
+</div>
 
-  let lastFocus = null;
+									</div>
+								<div class="lb-gallery">
 
-  function openLightbox(fullSrc, altText, caption){
-    lastFocus = document.activeElement;
-
-    imgEl.src = fullSrc;
-    imgEl.alt = altText || '';
-    capEl.textContent = caption || '';
-
-    lb.classList.add('is-open');
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('lb-lock');
-
-    // move focus to close button for accessibility
-    closeBt.focus();
-  }
-
-  function closeLightbox(){
-    lb.classList.remove('is-open');
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('lb-lock');
-
-    // unload the large image (optional)
-    imgEl.src = '';
-
-    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
-  }
-
-  // Bind thumbnails
-  document.querySelectorAll('.thumb').forEach(a => {
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      const full = a.dataset.full || a.getAttribute('href');
-      const img  = a.querySelector('img');
-      openLightbox(full, img?.alt, a.dataset.caption);
-    });
-  });
-
-  // Close controls
-  closeBt.addEventListener('click', closeLightbox);
-
-  // Click on backdrop closes (but not clicks inside the panel)
-  lb.addEventListener('click', (e) => {
-    if (!panel.contains(e.target)) closeLightbox();
-  });
-
-  // ESC closes
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
-  });
-
-  // Simple focus trap (keeps tabbing inside while open)
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Tab' || !lb.classList.contains('is-open')) return;
-    const focusables = lb.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
-    const first = focusables[0];
-    const last  = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  });
-</script>
 								</section>
 
 								<!-- Seven -->
