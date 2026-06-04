@@ -3285,3 +3285,118 @@ input, select, textarea {
 			}
 
 	}
+
+/* =========================================================
+   Lightbox + thumbnail gallery (HTML5UP Read Only integration)
+   ========================================================= */
+
+/* Gallery block spacing consistent with theme */
+.lb-gallery {
+	margin: 0 0 2.25em 0;
+}
+
+/* Landscape thumbs: stack on phones, 2-up on wider screens */
+.lb-grid {
+	display: grid;
+	grid-template-columns: 1fr; /* phone default */
+	gap: 1em;
+	align-items: start;
+}
+
+@media screen and (min-width: 736px) {
+	.lb-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* Remove theme link underline/border from thumbnail anchors */
+.lb-thumb {
+	display: block;
+	border-bottom: 0;   /* overrides global a { border-bottom: ... } */
+	text-decoration: none;
+	color: inherit;
+	cursor: zoom-in;
+}
+
+/* Thumb image styling aligned with theme */
+.lb-thumb img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 5px;           /* matches .image img */
+	border: solid 2px #e4e4e4;    /* matches theme borders */
+}
+
+/* Subtle hover consistent with theme accent */
+.lb-thumb:hover img {
+	border-color: #3d8ca1;
+}
+
+/* ---- Lightbox overlay ---- */
+.lb-overlay {
+	position: fixed;
+	inset: 0;
+	display: none;
+	z-index: 10050; /* above #header (10002) and #titleBar (10001) */
+	background: rgba(0,0,0,0.78);
+	padding: 24px;
+}
+
+.lb-overlay.is-open {
+	display: flex;
+}
+
+body.lb-lock {
+	overflow: hidden;
+}
+
+/* Lightbox panel */
+.lb-panel {
+	margin: auto;
+	position: relative;
+	width: min(96vw, 1200px);
+	background: #111;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* The key part: always show full width (x-extent) */
+.lb-panel img {
+	display: block;
+	width: 100%;
+	height: auto;        /* keeps aspect ratio; width always fully visible */
+	max-height: 82vh;    /* scales down if too tall */
+	object-fit: contain; /* belt-and-suspenders */
+	background: #111;
+}
+
+.lb-caption {
+	color: #ddd;
+	padding: 0.75em 1em;
+	font-size: 0.9em;
+	line-height: 1.5em;
+}
+
+/* Close button */
+.lb-close {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	position: absolute;
+	top: 0.6em;
+	right: 0.6em;
+	width: 2.4em;
+	height: 2.4em;
+	border: 0;
+	border-radius: 100%;
+	background: rgba(255,255,255,0.12);
+	color: #000;
+	font-size: 1.2em;
+	line-height: 2.4em;
+	cursor: pointer;
+}
+
+.lb-close:hover {
+	background: rgba(255,255,255,0.20);
+}

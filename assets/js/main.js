@@ -156,4 +156,58 @@
 			}
 		});
 
+// -------------------------------------------------------
+	// Lightbox (thumbnail -> full image)
+	// -------------------------------------------------------
+	(function() {
+		var $overlay = $('#lb-overlay');
+		if ($overlay.length === 0) return;
+
+		var $panel = $overlay.find('.lb-panel');
+		var $img = $('#lb-img');
+		var $cap = $('#lb-caption');
+		var $close = $overlay.find('.lb-close');
+
+		function openLB(src, alt, caption) {
+			$img.attr('src', src);
+			$img.attr('alt', alt || '');
+			$cap.text(caption || '');
+
+			$overlay.addClass('is-open').attr('aria-hidden', 'false');
+			$body.addClass('lb-lock');
+			$close.trigger('focus');
+		}
+
+		function closeLB() {
+			$overlay.removeClass('is-open').attr('aria-hidden', 'true');
+			$body.removeClass('lb-lock');
+
+			// unload large image (optional)
+			$img.attr('src', '');
+		}
+
+		// Open on thumb click
+		$('.lb-thumb').on('click', function(e) {
+			e.preventDefault();
+			var $a = $(this);
+			var src = $a.data('full') || $a.attr('href');
+			var alt = $a.find('img').attr('alt');
+			var caption = $a.data('caption');
+			openLB(src, alt, caption);
+		});
+
+		// Close on button
+		$close.on('click', closeLB);
+
+		// Close on clicking backdrop (but not the panel itself)
+		$overlay.on('click', function(e) {
+			if (!$panel[0].contains(e.target)) closeLB();
+		});
+
+		// Close on ESC
+		$window.on('keydown', function(e) {
+			if (e.key === 'Escape' && $overlay.hasClass('is-open')) closeLB();
+		});
+	})();
+
 })(jQuery);
