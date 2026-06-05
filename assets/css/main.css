@@ -3414,3 +3414,13 @@ body.lb-lock {
   width: 100%;
   height: auto;
 }
+
+.image.right.fincalogo{
+  width: 30%;
+  max-width: 10em;  /* strong cap for a logo */
+}
+
+.image.right.fincalogo img{
+  width: 100%;
+  height: auto;
+}
