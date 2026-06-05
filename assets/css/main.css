@@ -2928,11 +2928,12 @@ input, select, textarea {
 		/* Image */
 
 			.image.left, .image.right {
-				max-width: 40%;
+					width: 50%;
+					max-width: 40%;
 			}
 
 				.image.left img, .image.right img {
-					width: 50%;
+					width: 100%;
 				}
 
 			.image.main {
