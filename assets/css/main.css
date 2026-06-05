@@ -3401,3 +3401,16 @@ body.lb-lock {
 .lb-close:hover {
 	background: rgba(255,255,255,0.20);
 }
+
+/* Constrain floated images on ALL screen sizes */
+.image.left,
+.image.right{
+  width: 40%;          
+  max-width: 18em;     
+}
+
+.image.left img,
+.image.right img{
+  width: 100%;
+  height: auto;
+}
